@@ -1,18 +1,25 @@
+require IEx;
+
 defmodule Chop do
-  def guess(actual, range) when div(range.last, 2) < actual do
-    guess = div(range.last, 2)
-    IO.puts "Is it #{guess}"
-    Chop.guess(actual, 1..guess)
+  def guess(actual, range) do
+    diff = range.last - range.first
+    current_guess = div(diff, 2) + range.first
+
+    print_and_call(actual, range, current_guess)
   end
 
-  def guess(actual, range) when div(range.last, 2) > actual do
-    guess = div(range.last, 2)
-    IO.puts "Is it #{guess}"
-    Chop.guess(actual, guess..1000)
+  def print_and_call(actual, range, current_guess) when current_guess > actual do
+    IO.puts "Is it #{current_guess}"
+    Chop.guess(actual, range.first..current_guess)
   end
 
-  def guess(actual, range) when div(range.last, 2) == actual do
-    IO.puts div(range.last, 2)
+  def print_and_call(actual, range, current_guess) when current_guess < actual do
+    IO.puts "Is it #{current_guess}"
+    Chop.guess(actual, (current_guess + 1)..range.last)
+  end
+
+  def print_and_call(actual, _, current_guess) when current_guess == actual do
+    IO.puts current_guess
   end
 end
 
