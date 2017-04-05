@@ -1,3 +1,0 @@
-defmodule MyList do
-
-end
