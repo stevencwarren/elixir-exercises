@@ -1,4 +1,3 @@
-require IEx
 defmodule MyList do
   def mapsum(list, func) do
     mapped_list = _mapsum(list, func)
